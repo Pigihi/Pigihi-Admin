@@ -47,7 +47,7 @@ public class AdminCustomerService implements AdminCustomerServiceInterface {
 	public String findCustomer(String email) throws IOException, InterruptedException {
 		//TODO Call customer microservice for getting information of a customer
 		HttpClient customerClient = HttpClient.newHttpClient();
-		URI uri = URI.create("http://localhost:8091/user/customer");
+		URI uri = URI.create("http://localhost:8091/user/customer?email=" + email);
 		HttpRequest customeRequest = HttpRequest.newBuilder()
 										.setHeader("Content-Type", "application/json")
 										.uri(uri)
@@ -66,7 +66,8 @@ public class AdminCustomerService implements AdminCustomerServiceInterface {
 		Gson gson = new Gson();
 		String customerJson = gson.toJson(customerModel);
 		HttpClient customerClient = HttpClient.newHttpClient();
-		URI uri = URI.create("http://localhost:8091/user/customer");
+//		URI uri = URI.create("http://localhost:8091/user/customer");
+		URI uri = URI.create("http://localhost:8099/auth/register/user");
 		HttpRequest customerRequest = HttpRequest.newBuilder()
 										.setHeader("Content-Type", "application/json")
 										.uri(uri)
@@ -74,7 +75,7 @@ public class AdminCustomerService implements AdminCustomerServiceInterface {
 										.build();
 		HttpResponse<String> response = customerClient.send(customerRequest, 
 										HttpResponse.BodyHandlers.ofString());
-		System.out.println("Response from Customer Service: " + response.body());
+		System.out.println("Response from Authentication Service: " + response.body());
 		return response.body();
 		
 	}
@@ -85,8 +86,9 @@ public class AdminCustomerService implements AdminCustomerServiceInterface {
 		HttpClient httpClient = HttpClient.newHttpClient();
 		URI uri = URI.create("http://localhost:8091/user/customer/byAdmin?email=" + email);
 		HttpRequest customeRequest = HttpRequest.newBuilder()
+//										.setHeader("Content-Type", "application/json-patch+json")
 										.uri(uri)
-										.method("PATCH", null)
+										.method("PATCH", BodyPublishers.ofString(""))
 										.build();
 		HttpResponse<String> response = httpClient.send(customeRequest, 
 										HttpResponse.BodyHandlers.ofString());
@@ -122,7 +124,7 @@ public class AdminCustomerService implements AdminCustomerServiceInterface {
 		URI uri = URI.create("http://localhost:8091/user/customer/byAdmin?email=" + email);
 		HttpRequest customerRequest = HttpRequest.newBuilder()
 										.uri(uri)
-										.GET()
+										.DELETE()
 										.build();
 		HttpResponse<String> response = httpClient.send(customerRequest, 
 										HttpResponse.BodyHandlers.ofString());

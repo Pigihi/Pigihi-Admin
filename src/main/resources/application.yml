@@ -1,28 +1,7 @@
-eureka_hostname: service-registry
-
-service_hostname: admin-service
-
-# Production environment
-#mongodb_hostname: shop-db
-#mongodb_database_name: adminDB
-
-# Development environment
-mongodb_hostname: localhost
-mongodb_database_name: testWorkingDB
-
 # Test environment
-#mongodb_hostname: shop-db
+#mongodb_hostname: admin-db
 #mongodb_database_name: testAdminDB
 
-# Eureka properties
-#eureka:
-#  client:
-#    fetch-registry: true
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://${eureka_hostname}:8761/eureka
-#  instance:
-#    hostname: ${service_hostname}
 
 # Server properties
 server:
@@ -40,3 +19,5 @@ spring:
       port: 27017
   config:
     import: optional:settings.yml
+  profiles:
+    active: standalone

@@ -43,6 +43,7 @@ public class AdminCustomerController {
 
 	@GetMapping
 	public String customerInfo(@RequestParam String email) throws IOException, InterruptedException {
+		//TODO Even if customer service is returning an error, the admin service returns a 200 OK status. Correct that
 		String customer = adminCustomerService.findCustomer(email);
 		return customer;
 	}
