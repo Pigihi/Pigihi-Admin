@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pigihi.model.CustomerModel;
 import com.pigihi.model.EditCustomerModel;
-import com.pigihi.service.AdminCustomerServiceInterface;
+import com.pigihi.service.AdminCustomerAddService;
+import com.pigihi.service.AdminCustomerEditService;
+import com.pigihi.service.AdminCustomerFindService;
 
 
 /**
@@ -33,42 +35,48 @@ import com.pigihi.service.AdminCustomerServiceInterface;
 public class AdminCustomerController {
 
 	@Autowired
-	private AdminCustomerServiceInterface adminCustomerService;
-
+	private AdminCustomerFindService adminCustomerFindService;
+	
+	@Autowired
+	private AdminCustomerAddService adminCustomerAddService;
+	
+	@Autowired
+	private AdminCustomerEditService adminCustomerEditService;
+	
 	@GetMapping("/all")
 	public String getCustomers() throws IOException, InterruptedException {
-		String customers = adminCustomerService.findAllCustomers();
+		String customers = adminCustomerFindService.findAllCustomers();
 		return customers;
 	}
 
 	@GetMapping
 	public String customerInfo(@RequestParam String email) throws IOException, InterruptedException {
 		//TODO Even if customer service is returning an error, the admin service returns a 200 OK status. Correct that
-		String customer = adminCustomerService.findCustomer(email);
+		String customer = adminCustomerFindService.findCustomer(email);
 		return customer;
 	}
 	
 	@PostMapping
 	public String addCustomer(@RequestBody CustomerModel customerModel) throws IOException, InterruptedException {
-		String customer = adminCustomerService.addCustomer(customerModel);
+		String customer = adminCustomerAddService.addCustomer(customerModel);
 		return customer;
 	}
 	
 	@PutMapping
 	public String editCustomer(@RequestBody EditCustomerModel editCustomerModel) throws IOException, InterruptedException {
-		String customer = adminCustomerService.editCustomer(editCustomerModel);
+		String customer = adminCustomerEditService.editCustomer(editCustomerModel);
 		return customer;
 	}
 	
 	@PatchMapping
 	public String enableCustomer(@RequestParam String email) throws IOException, InterruptedException {
-		String customer = adminCustomerService.enableCustomer(email);
+		String customer = adminCustomerEditService.enableCustomer(email);
 		return customer;
 	}
 	
 	@DeleteMapping
 	public String disableCustomer(@RequestParam String email) throws IOException, InterruptedException {
-		String customer = adminCustomerService.disableCustomer(email);
+		String customer = adminCustomerEditService.disableCustomer(email);
 		return customer;
 	}
 

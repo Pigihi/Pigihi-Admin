@@ -3,6 +3,26 @@
 mongodb_hostname: localhost
 mongodb_database_name: testWorkingDB
 
+# Customer service
+customerService:
+  uri: http://localhost:8091/user/customer
+  endpoint:
+    allCustomers: /all
+    oneCustomer:
+      queryParam: email
+    enableCustomer:
+      endpoint: /byAdmin
+      queryParam: email
+    disableCustomer:
+      endpoint: /byAdmin
+      queryParam: email
+
+# Auth URIs
+authService:
+  uri: http://localhost:8099/auth
+  endpoint:
+    addCustomer: /register/user
+
 # Eureka properties
 eureka:
   client:
