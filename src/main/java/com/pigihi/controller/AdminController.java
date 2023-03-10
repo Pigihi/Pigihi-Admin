@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/admin")
+@RequestMapping("/user/admin")
 public class AdminController {
 	
 	

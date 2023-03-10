@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.pigihi.model.CustomerModel;
+import com.pigihi.model.ShopModel;
 import com.pigihi.utility.DataFormatter;
 import com.pigihi.utility.request.rest.POSTRequestSender;
 
@@ -19,7 +20,7 @@ import com.pigihi.utility.request.rest.POSTRequestSender;
  *
  */
 @Service
-public class AdminCustomerAddService {
+public class AdminShopAddService {
 	
 	@Autowired
 	private POSTRequestSender postRequestSender;
@@ -32,15 +33,15 @@ public class AdminCustomerAddService {
 	
 	@Value("${authService.endpoint.addUser}")
 	private String addAuthUserEndpoint;
+	
+	public String addShop(ShopModel shopModel) throws IOException, InterruptedException {
 
-	public String addCustomer(CustomerModel customerModel) throws IOException, InterruptedException {
-
-		String jsonString = dataFormatter.convertToJson(customerModel);
+		String jsonString = dataFormatter.convertToJson(shopModel);
 		HttpResponse<String> response = postRequestSender.send(authUri.concat(addAuthUserEndpoint), 
 															jsonString);
 		System.out.println("Response from Authentication Service: " + response.body());
 		return response.body();
 
 	}
-	
+
 }

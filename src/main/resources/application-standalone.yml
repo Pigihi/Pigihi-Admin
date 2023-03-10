@@ -17,11 +17,25 @@ customerService:
       endpoint: /byAdmin
       queryParam: email
 
+# Shop service
+shopService:
+  uri: http://localhost:8095/user/shop
+  endpoint:
+    allShops: /all
+    oneShop:
+      queryParam: email
+    enableShop:
+      endpoint: /byAdmin
+      queryParam: email
+    disableShop:
+      endpoint: /byAdmin
+      queryParam: email
+
 # Auth URIs
 authService:
   uri: http://localhost:8099/auth
   endpoint:
-    addCustomer: /register/user
+    addUser: /register/user
 
 # Eureka properties
 eureka:
