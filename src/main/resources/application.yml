@@ -1,0 +1,23 @@
+# Test environment
+#mongodb_hostname: admin-db
+#mongodb_database_name: testAdminDB
+
+
+# Server properties
+server:
+  port: 8090
+
+# Application properties
+spring:
+  application:
+    name: ADMIN-SERVICE
+# MongoDB properties
+  data:
+    mongodb:
+      database: ${mongodb_database_name}
+      host: ${mongodb_hostname}
+      port: 27017
+  config:
+    import: optional:settings.yml
+  profiles:
+    active: standalone

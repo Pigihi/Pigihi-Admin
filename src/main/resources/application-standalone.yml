@@ -1,0 +1,56 @@
+# Standalone environment
+
+mongodb_hostname: localhost
+mongodb_database_name: testWorkingDB
+
+# Customer service
+customerService:
+  uri: http://localhost:8091/user/customer
+  endpoint:
+    allCustomers: /all
+    oneCustomer:
+      queryParam: email
+    enableCustomer:
+      endpoint: /byAdmin
+      queryParam: email
+    disableCustomer:
+      endpoint: /byAdmin
+      queryParam: email
+    admin:
+      endpoint: /admin
+      fullName:
+        endpoint: /fullName
+        queryParam1: email
+        queryParam2: fullName
+      profileImage:
+        endpoint: /profileImage
+        queryParam1: email
+        queryParam2: imageUrl
+      address:
+        endpoint: /address
+        queryParam: email
+
+# Shop service
+shopService:
+  uri: http://localhost:8095/user/shop
+  endpoint:
+    allShops: /all
+    oneShop:
+      queryParam: email
+    enableShop:
+      endpoint: /byAdmin
+      queryParam: email
+    disableShop:
+      endpoint: /byAdmin
+      queryParam: email
+
+# Auth URIs
+authService:
+  uri: http://localhost:8099/auth
+  endpoint:
+    addUser: /register/user
+
+# Eureka properties
+eureka:
+  client:
+    enabled: false
