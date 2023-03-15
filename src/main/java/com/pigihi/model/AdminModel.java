@@ -1,9 +1,7 @@
 /**
  * 
  */
-package com.pigihi.entity;
-
-import com.pigihi.model.UserModel;
+package com.pigihi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

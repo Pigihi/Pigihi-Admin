@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pigihi.service;
+package com.pigihi.service.shop;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.pigihi.library.dataConverter.service.DataConverter;
 import com.pigihi.model.EditCustomerModel;
 import com.pigihi.model.EditShopModel;
-import com.pigihi.utility.DataFormatter;
-import com.pigihi.utility.request.rest.DELETERequestSender;
-import com.pigihi.utility.request.rest.PATCHRequestSender;
-import com.pigihi.utility.request.rest.PUTRequestSender;
+import com.pigihi.service.DELETERequestSender;
+import com.pigihi.service.PATCHRequestSender;
+import com.pigihi.service.PUTRequestSender;
 
 /**
  * @author Ashish Sam T George
@@ -34,7 +34,7 @@ public class AdminShopEditService {
 	private DELETERequestSender deleteRequestSender;
 	
 	@Autowired
-	private DataFormatter dataFormatter;
+	private DataConverter dataConverter;
 	
 	@Value("${shopService.uri}")
 	private String shopUri;
@@ -53,7 +53,7 @@ public class AdminShopEditService {
 	
 	public String editShop(EditShopModel editShopModel) throws IOException, InterruptedException {
 
-		String jsonString = dataFormatter.convertToJson(editShopModel);
+		String jsonString = dataConverter.convertToJson(editShopModel);
 		HttpResponse<String> response = putRequestSender.send(shopUri, jsonString);
 		System.out.println("Response from Shop Service: " + response.body());
 		return response.body();

@@ -11,10 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.pigihi.entity.AdminEntity;
-import com.pigihi.entity.AdminModel;
+import com.pigihi.library.dataConverter.service.DataConverter;
+import com.pigihi.model.AdminModel;
 import com.pigihi.repository.AdminRepository;
-import com.pigihi.utility.DataFormatter;
-import com.pigihi.utility.request.rest.POSTRequestSender;
 
 /**
  * @author Ashish Sam T George
@@ -36,7 +35,7 @@ public class AdminAddService {
 	private String addAuthUserEndpoint;
 	
 	@Autowired
-	private DataFormatter dataFormatter;
+	private DataConverter dataConverter;
 	
 	public String addAdmin(AdminModel adminModel) throws IOException, InterruptedException {
 		
@@ -46,9 +45,10 @@ public class AdminAddService {
 		adminEntity.setImageUrl(adminModel.getImageUrl());
 		adminEntity.setMobile(adminModel.getMobile());
 		adminEntity.setRole(adminModel.getRole());
+		//TODO How about enable status
 		
 		adminEntity = adminRepository.save(adminEntity);
-		String jsonString = dataFormatter.convertToJson(adminModel);
+		String jsonString = dataConverter.convertToJson(adminModel);
 		HttpResponse<String> response = postRequestSender.send(authUri.concat(addAuthUserEndpoint), 
 															jsonString);
 		System.out.println("Response from Authentication Service: " + response.body());

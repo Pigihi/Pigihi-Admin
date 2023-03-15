@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pigihi.service;
+package com.pigihi.service.customer;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.pigihi.library.dataConverter.service.DataConverter;
 import com.pigihi.model.EditCustomerModel;
-import com.pigihi.utility.DataFormatter;
-import com.pigihi.utility.request.rest.DELETERequestSender;
-import com.pigihi.utility.request.rest.PATCHRequestSender;
-import com.pigihi.utility.request.rest.PUTRequestSender;
+import com.pigihi.service.DELETERequestSender;
+import com.pigihi.service.PATCHRequestSender;
+import com.pigihi.service.PUTRequestSender;
 
 /**
  * @author Ashish Sam T George
@@ -33,7 +33,7 @@ public class AdminCustomerEditService {
 	private DELETERequestSender deleteRequestSender;
 	
 	@Autowired
-	private DataFormatter dataFormatter;
+	private DataConverter dataConverter;
 	
 	@Value("${customerService.uri}")
 	private String customerUri;
@@ -52,7 +52,7 @@ public class AdminCustomerEditService {
 	
 	public String editCustomer(EditCustomerModel editCustomerModel) throws IOException, InterruptedException {
 
-		String jsonString = dataFormatter.convertToJson(editCustomerModel);
+		String jsonString = dataConverter.convertToJson(editCustomerModel);
 		HttpResponse<String> response = putRequestSender.send(customerUri, jsonString);
 		System.out.println("Response from Customer Service: " + response.body());
 		return response.body();
@@ -78,5 +78,9 @@ public class AdminCustomerEditService {
 		
 		return response.body();
 	}
-
+	
+//	public String changeEmail(String email, String newEmail) {
+//		String uri = customerUri.concat(newEmail)
+//	}
+	
 }

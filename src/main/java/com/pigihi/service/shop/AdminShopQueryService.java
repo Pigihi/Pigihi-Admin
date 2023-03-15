@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pigihi.service;
+package com.pigihi.service.shop;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.pigihi.utility.request.rest.GETRequestSender;
+import com.pigihi.service.GETRequestSender;
 
 /**
  * @author Ashish Sam T George
  *
  */
 @Service
-public class AdminShopFindService {
+public class AdminShopQueryService {
 	
 	@Autowired
 	private GETRequestSender getRequestSender;

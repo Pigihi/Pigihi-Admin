@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pigihi.model.CustomerAddressModel;
 import com.pigihi.model.CustomerModel;
 import com.pigihi.model.EditCustomerModel;
-import com.pigihi.service.AdminCustomerAddService;
-import com.pigihi.service.AdminCustomerEditService;
-import com.pigihi.service.AdminCustomerFindService;
+import com.pigihi.service.customer.AdminCustomerAddService;
+import com.pigihi.service.customer.AdminCustomerAddressService;
+import com.pigihi.service.customer.AdminCustomerEditService;
+import com.pigihi.service.customer.AdminCustomerNameService;
+import com.pigihi.service.customer.AdminCustomerProfileImageService;
+import com.pigihi.service.customer.AdminCustomerQueryService;
 
 
 /**
@@ -35,13 +39,22 @@ import com.pigihi.service.AdminCustomerFindService;
 public class AdminCustomerController {
 
 	@Autowired
-	private AdminCustomerFindService adminCustomerFindService;
+	private AdminCustomerQueryService adminCustomerFindService;
 	
 	@Autowired
 	private AdminCustomerAddService adminCustomerAddService;
 	
 	@Autowired
 	private AdminCustomerEditService adminCustomerEditService;
+	
+	@Autowired
+	private AdminCustomerNameService adminCustomerNameService;
+	
+	@Autowired
+	private AdminCustomerProfileImageService adminCustomerProfileImageService;
+	
+	@Autowired
+	private AdminCustomerAddressService adminCustomerAddressService;
 	
 	@GetMapping("/all")
 	public String getCustomers() throws IOException, InterruptedException {
@@ -77,6 +90,26 @@ public class AdminCustomerController {
 	@DeleteMapping
 	public String disableCustomer(@RequestParam String email) throws IOException, InterruptedException {
 		String customer = adminCustomerEditService.disableCustomer(email);
+		return customer;
+	}
+	
+	@PutMapping("/fullName")
+	public String changeCustomerName(@RequestParam String email,
+										@RequestParam String fullName) throws IOException, InterruptedException {
+		String customer = adminCustomerNameService.changeFullName(email, fullName);
+		return customer;
+	}
+	
+	@PutMapping("/profileImage")
+	public String changeProfileImage(@RequestParam String email,
+										@RequestParam String imageUrl) throws IOException, InterruptedException {
+		String customer = adminCustomerProfileImageService.changeProfileImage(email, imageUrl);
+		return customer;
+	}
+	
+	public String changeAddress(@RequestParam String email,
+								@RequestBody CustomerAddressModel customerAddressModel) throws IOException, InterruptedException {
+		String customer = adminCustomerAddressService.changeAddress(email, customerAddressModel);
 		return customer;
 	}
 

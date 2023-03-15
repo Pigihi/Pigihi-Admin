@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pigihi.entity.AdminEntity;
-import com.pigihi.entity.AdminModel;
+import com.pigihi.model.AdminModel;
 import com.pigihi.service.AdminAddService;
-import com.pigihi.service.AdminFindService;
+import com.pigihi.service.AdminQueryService;
 
 /**
  * Controller class for Admin
@@ -36,10 +36,11 @@ public class AdminController {
 	private AdminAddService adminAddService;
 	
 	@Autowired
-	private AdminFindService adminFindService;
+	private AdminQueryService adminFindService;
 	
 	@GetMapping
 	public String adminInfo(@RequestParam String email) throws IOException, InterruptedException {
+		//TODO Get email from header
 		String admin = adminFindService.findAdmin(email);
 		return admin;
 	}

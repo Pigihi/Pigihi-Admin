@@ -21,9 +21,9 @@ import com.pigihi.model.CustomerModel;
 import com.pigihi.model.EditCustomerModel;
 import com.pigihi.model.EditShopModel;
 import com.pigihi.model.ShopModel;
-import com.pigihi.service.AdminShopAddService;
-import com.pigihi.service.AdminShopEditService;
-import com.pigihi.service.AdminShopFindService;
+import com.pigihi.service.shop.AdminShopAddService;
+import com.pigihi.service.shop.AdminShopEditService;
+import com.pigihi.service.shop.AdminShopQueryService;
 
 /**
  * @author Ashish Sam T George
@@ -35,7 +35,7 @@ import com.pigihi.service.AdminShopFindService;
 public class AdminShopController {
 	
 	@Autowired
-	private AdminShopFindService adminShopFindService;
+	private AdminShopQueryService adminShopFindService;
 	
 	@Autowired
 	private AdminShopAddService adminShopAddService;

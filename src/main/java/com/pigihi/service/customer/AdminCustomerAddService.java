@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pigihi.service;
+package com.pigihi.service.customer;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.pigihi.library.dataConverter.service.DataConverter;
 import com.pigihi.model.CustomerModel;
-import com.pigihi.utility.DataFormatter;
-import com.pigihi.utility.request.rest.POSTRequestSender;
+import com.pigihi.service.POSTRequestSender;
 
 /**
  * @author Ashish Sam T George
@@ -25,7 +25,7 @@ public class AdminCustomerAddService {
 	private POSTRequestSender postRequestSender;
 	
 	@Autowired
-	private DataFormatter dataFormatter;
+	private DataConverter dataConverter;
 	
 	@Value("${authService.uri}")
 	private String authUri;
@@ -35,7 +35,7 @@ public class AdminCustomerAddService {
 
 	public String addCustomer(CustomerModel customerModel) throws IOException, InterruptedException {
 
-		String jsonString = dataFormatter.convertToJson(customerModel);
+		String jsonString = dataConverter.convertToJson(customerModel);
 		HttpResponse<String> response = postRequestSender.send(authUri.concat(addAuthUserEndpoint), 
 															jsonString);
 		System.out.println("Response from Authentication Service: " + response.body());

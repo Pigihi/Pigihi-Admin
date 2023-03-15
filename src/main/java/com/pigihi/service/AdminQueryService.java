@@ -10,27 +10,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pigihi.entity.AdminEntity;
+import com.pigihi.library.dataConverter.service.DataConverter;
 import com.pigihi.repository.AdminRepository;
-import com.pigihi.utility.DataFormatter;
-import com.pigihi.utility.request.rest.GETRequestSender;
 
 /**
  * @author Ashish Sam T George
  *
  */
 @Service
-public class AdminFindService {
+public class AdminQueryService {
 	
 	@Autowired
 	private AdminRepository adminRepository;
 	
 	@Autowired
-	private DataFormatter dataFormatter;
+	private DataConverter dataConverter;
 	
 	public String findAdmin(String email) throws IOException, InterruptedException {
 
 		AdminEntity adminEntity = adminRepository.findByEmail(email);
-		String adminJson = dataFormatter.convertToJson(adminEntity);
+		String adminJson = dataConverter.convertToJson(adminEntity);
 		return adminJson;
 		
 	}
