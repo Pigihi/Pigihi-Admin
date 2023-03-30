@@ -1,5 +1,4 @@
-package com.pigihi.clients.customer;
-
+package com.pigihi.clients.shop;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,39 +9,38 @@ import org.springframework.beans.factory.annotation.Value;
 import com.pigihi.clients.ClientCommunicator;
 import com.pigihi.service.POSTRequestSender;
 
-
-public class CustomerPOSTCommunicator implements ClientCommunicator {
-
+public class ShopPOSTCommunicator implements ClientCommunicator {
+	
 	private String endpoint;
 	private String jsonBody = "";
 	
 	@Autowired
 	private POSTRequestSender postRequestSender;
-
-	@Value("${customerService.uri}")
-	private String customerUri;
-
-	public CustomerPOSTCommunicator(String endpoint) {
+	
+	@Value("${shopService.uri}")
+	private String shopUri;
+	
+	public ShopPOSTCommunicator(String endpoint) {
 		this.endpoint = endpoint;
 	}
-
-	public CustomerPOSTCommunicator(String endpoint, String queryParam, String value) {
+	
+	public ShopPOSTCommunicator(String endpoint, String queryParam, String value) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 	}
 
-	public CustomerPOSTCommunicator(String endpoint, String jsonBody) {
+	public ShopPOSTCommunicator(String endpoint, String jsonBody) {
 		this.endpoint = endpoint;
 		this.jsonBody = jsonBody;
 	}
 
-	public CustomerPOSTCommunicator(String endpoint, String queryParam, String value, String jsonBody) {
+	public ShopPOSTCommunicator(String endpoint, String queryParam, String value, String jsonBody) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 		this.jsonBody = jsonBody;
 	}
 
 	@Override
 	public String send() throws IOException, InterruptedException {
-		HttpResponse<String> response = postRequestSender.send(customerUri.concat(this.endpoint), this.jsonBody);
+		HttpResponse<String> response = postRequestSender.send(shopUri.concat(this.endpoint), this.jsonBody);
 		return response.body();
 	}
 

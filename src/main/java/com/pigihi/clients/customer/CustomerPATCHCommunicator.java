@@ -13,6 +13,12 @@ public class CustomerPATCHCommunicator implements ClientCommunicator {
 	
 	private String endpoint;
 	private String jsonBody = "";
+	
+	@Autowired
+	private PATCHRequestSender patchRequestSender;
+	
+	@Value("${customerService.uri}")
+	private String customerUri;
 
 	public CustomerPATCHCommunicator(String endpoint) {
 		this.endpoint = endpoint;
@@ -31,12 +37,6 @@ public class CustomerPATCHCommunicator implements ClientCommunicator {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 		this.jsonBody = jsonBody;
 	}
-	
-	@Autowired
-	private PATCHRequestSender patchRequestSender;
-	
-	@Value("${customerService.uri}")
-	private String customerUri;
 
 	@Override
 	public String send() throws IOException, InterruptedException {

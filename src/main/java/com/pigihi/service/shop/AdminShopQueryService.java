@@ -10,14 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.pigihi.clients.ClientCommunicator;
 import com.pigihi.service.GETRequestSender;
+import com.pigihi.service.UserQueryService;
 
 /**
  * @author Ashish Sam T George
  *
  */
 @Service
-public class AdminShopQueryService {
+public class AdminShopQueryService implements UserQueryService {
 	
 	@Autowired
 	private GETRequestSender getRequestSender;
@@ -31,22 +33,18 @@ public class AdminShopQueryService {
 	@Value("${shopService.endpoint.oneShop.queryParam}")
 	private String oneShopQueryParam;
 	
-	public String findAllShops() throws InterruptedException, IOException {
-
-		HttpResponse<String> response = getRequestSender.send(
-															shopUri.concat(allShopEndpoint));
-		System.out.println("Response from customer service: " + response.body());
-		return response.body();
-		
+	@Override
+	public String findAll(ClientCommunicator clientCommunicator) throws InterruptedException, IOException {
+		String response = clientCommunicator.send();
+		System.out.println("Response from shop service: " + response);
+		return response;
 	}
 
-	public String findShop(String email) throws IOException, InterruptedException {
-
-		HttpResponse<String> response = getRequestSender.send(shopUri, 
-																oneShopQueryParam, email);
-		System.out.println("Response from customer service: " + response.body());
-		return response.body();
-		
+	@Override
+	public String find(ClientCommunicator clientCommunicator) throws IOException, InterruptedException {
+		String response = clientCommunicator.send();
+		System.out.println("Response from shop service: " + response);
+		return response;
 	}
 
 }

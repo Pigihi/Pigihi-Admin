@@ -143,13 +143,6 @@ public class AdminCustomerController {
 		return customer;
 	}
 
-//	@PutMapping
-//	public String editCustomer(@RequestBody EditCustomerModel editCustomerModel)
-//			throws IOException, InterruptedException {
-//		String customer = adminCustomerEditService.editCustomer(editCustomerModel);
-//		return customer;
-//	}
-
 	@PatchMapping
 	public String enableCustomer(@RequestParam String email) throws IOException, InterruptedException {
 		clientCommunicator = new CustomerPATCHCommunicator(enableCustomerEndpoint, enableCustomerQueryParam, email);

@@ -1,5 +1,4 @@
-package com.pigihi.clients.customer;
-
+package com.pigihi.clients.shop;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,27 +9,26 @@ import org.springframework.beans.factory.annotation.Value;
 import com.pigihi.clients.ClientCommunicator;
 import com.pigihi.service.PUTRequestSender;
 
-
-public class CustomerPUTCommunicator implements ClientCommunicator {
-
+public class ShopPUTCommunicator implements ClientCommunicator {
+	
 	private String endpoint;
 	private String jsonBody = "";
 	
 	@Autowired
 	private PUTRequestSender putRequestSender;
-
-	@Value("${customerService.uri}")
-	private String customerUri;
-
-	public CustomerPUTCommunicator(String endpoint) {
+	
+	@Value("${shopService.uri}")
+	private String shopUri;
+	
+	public ShopPUTCommunicator(String endpoint) {
 		this.endpoint = endpoint;
 	}
 
-	public CustomerPUTCommunicator(String endpoint, String queryParam, String value) {
+	public ShopPUTCommunicator(String endpoint, String queryParam, String value) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 	}
 
-	public CustomerPUTCommunicator(String endpoint, String queryParam1, String value1, String queryParam2,
+	public ShopPUTCommunicator(String endpoint, String queryParam1, String value1, String queryParam2,
 			String value2) {
 		this.endpoint = endpoint.concat("?")
 				.concat(queryParam1)
@@ -42,19 +40,19 @@ public class CustomerPUTCommunicator implements ClientCommunicator {
 				.concat(value2);
 	}
 
-	public CustomerPUTCommunicator(String endpoint, String jsonBody) {
+	public ShopPUTCommunicator(String endpoint, String jsonBody) {
 		this.endpoint = endpoint;
 		this.jsonBody = jsonBody;
 	}
 
-	public CustomerPUTCommunicator(String endpoint, String queryParam, String value, String jsonBody) {
+	public ShopPUTCommunicator(String endpoint, String queryParam, String value, String jsonBody) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 		this.jsonBody = jsonBody;
 	}
 
 	@Override
 	public String send() throws IOException, InterruptedException {
-		HttpResponse<String> response = putRequestSender.send(customerUri.concat(endpoint), this.jsonBody);
+		HttpResponse<String> response = putRequestSender.send(shopUri.concat(endpoint), this.jsonBody);
 		return response.body();
 	}
 

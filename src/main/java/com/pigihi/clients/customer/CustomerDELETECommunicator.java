@@ -14,6 +14,12 @@ public class CustomerDELETECommunicator implements ClientCommunicator {
 	
 	private String endpoint;
 	private String jsonBody = "";
+	
+	@Autowired
+	private DELETERequestSender deleteRequestSender;
+	
+	@Value("${customerService.uri}")
+	private String customerUri;
 
 	public CustomerDELETECommunicator(String endpoint) {
 		this.endpoint = endpoint;
@@ -32,12 +38,6 @@ public class CustomerDELETECommunicator implements ClientCommunicator {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 		this.jsonBody = jsonBody;
 	}
-	
-	@Autowired
-	private DELETERequestSender deleteRequestSender;
-	
-	@Value("${customerService.uri}")
-	private String customerUri;
 
 	@Override
 	public String send() throws IOException, InterruptedException {
