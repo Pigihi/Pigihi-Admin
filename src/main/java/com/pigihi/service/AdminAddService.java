@@ -38,7 +38,6 @@ public class AdminAddService {
 	private DataConverter dataConverter;
 	
 	public String addAdmin(AdminModel adminModel) throws IOException, InterruptedException {
-		
 		AdminEntity adminEntity = new AdminEntity();
 		adminEntity.setEmail(adminModel.getEmail());
 		adminEntity.setFullName(adminModel.getFullName());
@@ -53,7 +52,6 @@ public class AdminAddService {
 															jsonString);
 		System.out.println("Response from Authentication Service: " + response.body());
 		return response.body();
-		
 	}
 
 }

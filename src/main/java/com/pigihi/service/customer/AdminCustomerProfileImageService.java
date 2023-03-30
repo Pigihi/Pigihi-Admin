@@ -7,36 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.pigihi.clients.ClientCommunicator;
 import com.pigihi.service.PUTRequestSender;
+import com.pigihi.service.UserWriteService;
 
 @Service
-public class AdminCustomerProfileImageService {
-	
-	@Autowired
-	private PUTRequestSender putRequestSender;
-	
-	@Value("${customerService.uri}")
-	private String customerUri;
-	
-	@Value("${customerService.endpoint.admin.endpoint}")
-	private String customerAdminEndpoint;
-	
-	@Value("${customerService.endpoint.admin.profileImage.endpoint}")
-	private String customerProfileImageEndpoint;
-	
-	@Value("${customerService.endpoint.admin.profileImage.queryParam1}")
-	private String customerProfileImageQueryParam1;
-	
-	@Value("${customerService.endpoint.admin.profileImage.queryParam2}")
-	private String customerProfileImageQueryParam2;
+public class AdminCustomerProfileImageService implements UserWriteService {
 
-	public String changeProfileImage(String email, String imageUrl) throws IOException, InterruptedException {
-		String uri = customerUri.concat(customerAdminEndpoint).concat(customerProfileImageEndpoint);
-		HttpResponse<String> response = putRequestSender.send(uri, 
-													customerProfileImageQueryParam1, email, 
-													customerProfileImageQueryParam2, imageUrl);
-		System.out.println("Response obtained from customer service: " + response.body());
-		return response.body();
+	@Override
+	public String write(ClientCommunicator clientCommunicator) throws IOException, InterruptedException {
+		String response = clientCommunicator.send();
+		System.out.println("Response obtained from customer service: " + response);
+		return response;
 	}
 
 }
