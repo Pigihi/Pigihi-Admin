@@ -1,4 +1,4 @@
-package com.pigihi.clients.customer;
+package com.pigihi.client.shop;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -6,10 +6,10 @@ import java.net.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.pigihi.clients.ClientCommunicator;
+import com.pigihi.client.ClientCommunicator;
 import com.pigihi.service.PATCHRequestSender;
 
-public class CustomerPATCHCommunicator implements ClientCommunicator {
+public class ShopPATCHCommunicator implements ClientCommunicator {
 	
 	private String endpoint;
 	private String jsonBody = "";
@@ -19,21 +19,21 @@ public class CustomerPATCHCommunicator implements ClientCommunicator {
 	
 	@Value("${customerService.uri}")
 	private String customerUri;
-
-	public CustomerPATCHCommunicator(String endpoint) {
+	
+	public ShopPATCHCommunicator(String endpoint) {
 		this.endpoint = endpoint;
 	}
 
-	public CustomerPATCHCommunicator(String endpoint, String queryParam, String value) {
+	public ShopPATCHCommunicator(String endpoint, String queryParam, String value) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 	}
 
-	public CustomerPATCHCommunicator(String endpoint, String jsonBody) {
+	public ShopPATCHCommunicator(String endpoint, String jsonBody) {
 		this.endpoint = endpoint;
 		this.jsonBody = jsonBody;
 	}
 
-	public CustomerPATCHCommunicator(String endpoint, String queryParam, String value, String jsonBody) {
+	public ShopPATCHCommunicator(String endpoint, String queryParam, String value, String jsonBody) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 		this.jsonBody = jsonBody;
 	}
@@ -43,5 +43,5 @@ public class CustomerPATCHCommunicator implements ClientCommunicator {
 		HttpResponse<String> response = patchRequestSender.send(customerUri.concat(this.endpoint), this.jsonBody);
 		return response.body();
 	}
-	
+
 }

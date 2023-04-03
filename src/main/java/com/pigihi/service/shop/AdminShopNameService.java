@@ -2,7 +2,7 @@ package com.pigihi.service.shop;
 
 import java.io.IOException;
 
-import com.pigihi.clients.ClientCommunicator;
+import com.pigihi.client.ClientCommunicator;
 import com.pigihi.service.UserWriteService;
 
 public class AdminShopNameService implements UserWriteService {

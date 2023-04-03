@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pigihi.clients.ClientCommunicator;
+import com.pigihi.client.ClientCommunicator;
 import com.pigihi.entity.AdminEntity;
 import com.pigihi.library.dataConverter.service.DataConverter;
 import com.pigihi.repository.AdminRepository;

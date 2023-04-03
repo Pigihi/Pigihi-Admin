@@ -1,4 +1,4 @@
-package com.pigihi.clients;
+package com.pigihi.client;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;

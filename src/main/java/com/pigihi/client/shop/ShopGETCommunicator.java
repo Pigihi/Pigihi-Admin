@@ -1,5 +1,4 @@
-package com.pigihi.clients.customer;
-
+package com.pigihi.client.shop;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -7,33 +6,31 @@ import java.net.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.pigihi.clients.ClientCommunicator;
+import com.pigihi.client.ClientCommunicator;
 import com.pigihi.service.GETRequestSender;
 
-
-public class CustomerGETCommunicator implements ClientCommunicator {
-
+public class ShopGETCommunicator implements ClientCommunicator {
+	
 	private String endpoint;
 	
 	@Autowired
 	private GETRequestSender getRequestSender;
-
-	@Value("${customerService.uri}")
-	private String customerUri;
-
-	public CustomerGETCommunicator(String endpoint) {
+	
+	@Value("${shopService.uri}")
+	private String shopUri;
+	
+	public ShopGETCommunicator(String endpoint) {
 		this.endpoint = endpoint;
 	}
-
-	public CustomerGETCommunicator(String endpoint, String queryParam, String value) {
+	
+	public ShopGETCommunicator(String endpoint, String queryParam, String value) {
 		this.endpoint = endpoint.concat("?").concat(queryParam).concat("=").concat(value);
 	}
 
 	@Override
 	public String send() throws IOException, InterruptedException {
-		HttpResponse<String> response = getRequestSender.send(customerUri.concat(this.endpoint));
+		HttpResponse<String> response = getRequestSender.send(shopUri.concat(this.endpoint));
 		return response.body();
-
 	}
 
 }

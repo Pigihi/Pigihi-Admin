@@ -2,7 +2,7 @@ package com.pigihi.service;
 
 import java.io.IOException;
 
-import com.pigihi.clients.ClientCommunicator;
+import com.pigihi.client.ClientCommunicator;
 
 public interface UserQueryService {
 	

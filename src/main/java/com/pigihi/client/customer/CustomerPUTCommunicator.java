@@ -1,4 +1,4 @@
-package com.pigihi.clients.customer;
+package com.pigihi.client.customer;
 
 
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.net.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.pigihi.clients.ClientCommunicator;
+import com.pigihi.client.ClientCommunicator;
 import com.pigihi.service.PUTRequestSender;
 
 
