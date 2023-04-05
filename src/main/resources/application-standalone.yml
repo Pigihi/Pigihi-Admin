@@ -43,6 +43,25 @@ shopService:
     disableShop:
       endpoint: /byAdmin
       queryParam: email
+    admin:
+      endpoint: /admin
+      fullName:
+        endpoint: /fullName
+        queryParam1: email
+        queryParam2: fullName
+      profileImage:
+        endpoint: /profileImage
+        queryParam1: email
+        queryParam2: imageUrl
+      address:
+        endpoint: /address
+        queryParam: email
+      approve:
+        endpoint: /approve
+        queryParam: email
+      disapprove:
+        endpoint: /disapprove
+        queryParam: email
 
 # Auth URIs
 authService:

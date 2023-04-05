@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pigihi.service.shop;
+package com.pigihi.service.customer;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -12,9 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.pigihi.client.ClientCommunicator;
 import com.pigihi.library.dataConverter.service.DataConverter;
-import com.pigihi.model.CustomerModel;
-import com.pigihi.model.ShopModel;
-import com.pigihi.service.POSTRequestSender;
+import com.pigihi.model.EditCustomerModel;
+import com.pigihi.service.DELETERequestSender;
+import com.pigihi.service.PATCHRequestSender;
+import com.pigihi.service.PUTRequestSender;
 import com.pigihi.service.UserWriteService;
 
 /**
@@ -22,13 +23,13 @@ import com.pigihi.service.UserWriteService;
  *
  */
 @Service
-public class AdminShopAddService implements UserWriteService {
-	
+public class AdminCustomerStatusService implements UserWriteService {
+
 	@Override
 	public String write(ClientCommunicator clientCommunicator) throws IOException, InterruptedException {
 		String response = clientCommunicator.send();
-		System.out.println("Response from Authentication Service: " + response);
+		System.out.println("Response from customer service: " + response);
 		return response;
 	}
-
+	
 }
