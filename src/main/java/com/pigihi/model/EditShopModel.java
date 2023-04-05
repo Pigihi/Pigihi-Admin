@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.pigihi.model;
 
 import lombok.AllArgsConstructor;
@@ -6,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * 
  * @author Ashish Sam T George
  *
  */
@@ -14,7 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class EditCustomerModel extends UserModel {
+public class EditShopModel extends UserModel {
+	
 	private String email;
 	private String mobile;
 	private String imageUrl;

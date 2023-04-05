@@ -6,13 +6,15 @@ package com.pigihi.model;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Ashish Sam T George
  *
  */
 @Data
-public class CustomerModel {
+@EqualsAndHashCode(callSuper = true)
+public class CustomerModel extends UserModel {
 	
 //	private String id;
 	private String fullName;
